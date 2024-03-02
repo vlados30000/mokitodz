@@ -10,7 +10,6 @@ import ru.netology.entity.Location;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class GeoServiceImplTest {
     private static
@@ -27,18 +26,19 @@ class GeoServiceImplTest {
         Location locationResult = geoService.byIp(ip);
         Assertions.assertEquals(exсpextedLocation, locationResult);
     }
+
     public static Stream<Arguments> factory() {
         Location locationNewYorkFull = new Location("New York", Country.USA, " 10th Avenue", 32);
         Location location = new Location(null, null, null, 0);
         Location locationMoscowFull = new Location("Moscow", Country.RUSSIA, "Lenina", 15);
-        Location locationNewYork = new Location("New York", Country.USA, null,  0);
+        Location locationNewYork = new Location("New York", Country.USA, null, 0);
         Location locationMoscow = new Location("Moscow", Country.RUSSIA, null, 0);
         return Stream.of(
                 Arguments.of(GeoServiceImpl.LOCALHOST, location),
                 Arguments.of(GeoServiceImpl.MOSCOW_IP, locationMoscowFull),
                 Arguments.of(GeoServiceImpl.NEW_YORK_IP, locationNewYorkFull),
                 Arguments.of("96.", locationNewYork),
-                Arguments.of("172.",locationMoscow)
+                Arguments.of("172.", locationMoscow)
         );
 
     }

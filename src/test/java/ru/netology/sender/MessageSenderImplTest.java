@@ -15,15 +15,16 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MessageSenderImplTest{
+class MessageSenderImplTest {
     GeoService geoService;
     LocalizationService localizationService;
     MessageSender messageSender;
+
     @BeforeEach
     void setUp() {
         geoService = Mockito.mock(GeoService.class);
         localizationService = Mockito.mock(LocalizationService.class);
-        messageSender = new MessageSenderImpl(geoService,localizationService);
+        messageSender = new MessageSenderImpl(geoService, localizationService);
     }
 
     @Test
@@ -41,7 +42,7 @@ class MessageSenderImplTest{
     @Test
     void sendMessageInEnglish() {
         Mockito.when(geoService.byIp(Mockito.startsWith("96.")))
-                .thenReturn(new Location("New York", Country.USA, null,  0));
+                .thenReturn(new Location("New York", Country.USA, null, 0));
         Mockito.when(localizationService.locale(Country.USA)).thenReturn("Welcome");
         Map<String, String> headers = new HashMap<>();
         headers.put(MessageSenderImpl.IP_ADDRESS_HEADER, GeoServiceImpl.NEW_YORK_IP);
